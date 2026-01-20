@@ -1,4 +1,10 @@
+<?php
+    if(!isset($_SESSION)):
+        session_start();
+    endif;
 
+    require_once "classes/clientes.php";
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>

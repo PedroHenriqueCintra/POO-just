@@ -5,7 +5,7 @@
         private string $cpf;
         
 
-        public function __construct($id, $nome, $cpf) {
+        public function __construct($id = 0, $nome =  "", $cpf= "") {
             $this->id = $id;
             $this->nome = $nome;
             $this->cpf = $cpf;

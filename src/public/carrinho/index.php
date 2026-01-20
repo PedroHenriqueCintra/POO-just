@@ -1,3 +1,10 @@
+<?php
+    if(!isset($_SESSION)):
+        session_start();
+    endif;
+    require_once "classes/clientes.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +35,7 @@
     </header>
 
         <main>
+            <form action = "index.php?arquivo=controlador&metodo=finalizarCarrinho"method="post">                
                 <table>
                     <tr>
                         <td>Id</td>
@@ -40,29 +48,39 @@
                     </tr>
 
                     <tr>
-                        <td><?=   $_SESSION["carrinho"]["id"];?></td>
-                        <td>ryzen</td>
-                        <td>2</td>
-                        <td>000.000</td>
-                        <td><img src="lib/img/ryzen.jpg" alt=""></td>
-                        <td>000.000</td>
-                        <td><i class="fa-solid fa-trash"></i></td>
+                        <?php 
+                            if(isset($_SESSION["carrinho"])): 
+                                foreach($_SESSION["carrinho"] as $indice => $valor):
+                                $subtotal = $_SESSION["carrinho"][$indice]["preco"] * $_SESSION["carrinho"][$indice]["qtde"];
+                            ?>
+                        <td><?=   $_SESSION["carrinho"][$indice]["id"];?></td>
+                        <td><?=   $_SESSION["carrinho"][$indice]["descricao"];?></td>
+                        <td><input  class="qtde" type="text" value = " <?=$_SESSION["carrinho"][$indice]["qtde"];?>" name="quantidade" rel = "<?=  $indice;?>">
+                    </td>
+                        <td>R$ <?=   $_SESSION["carrinho"][$indice]["preco"];?></td>
+                        <td><img src="lib/img/<?=   $_SESSION["carrinho"][$indice]["imagem"];?>" alt=""></td>
+                        <td><?= number_format($subtotal , "2" , "," , "."); ?></td>
+                        <td><a href="index.php?arquivo=controlador&metodo=atualizarCarrinho&linha=<?= $indice ?>"><i class="fa-solid fa-trash"></i></a></td>
                     </tr>
+                    <?php endforeach;?>
                     <tr>
                         <td colspan="6">
+                            
                             <label for="">Selecionar Clientes</label>
                             <select name="" id="">
                                 <option value="">Selecione um cliente</option>
-                                <option value="">Ciclano</option>
-                                <option value="">Fulano</option>
+                                    <?php foreach($cliente as $clien):?>
+                                <option value="<?= $clien->getId();?>"><?=$clien->getNome();?></option>
+                                <?php endforeach;?>
                             </select>
                         
                             <label for="">Forma de pagamento</label>
                             <select name="" id="">
                                 <option value="">Selecione uma forma de pagamento</option>
-                                <option value="">Paypal</option>
-                                <option value="">Cartao</option>
-                                <option value="">Boleto</option>
+                                <option value="1">Boleto</option>
+                                <option value="2">Paypal</option>
+                                <option value="3">Cartao de Credito</option>
+                                
                             </select>
                         </td>
                     </tr>
@@ -71,7 +89,14 @@
                         <input type="submit" value = "finalizar">
                         </td>
                     </tr>
+                    <?php else:?>
+                    <tr>
+                        <td colspan = 7>Carrinho Vazio!</td>
+                    </tr>
+                                            <?php endif;?>
                 </table>
+                </form>
+
 
 
         </main>
@@ -320,6 +345,27 @@ main table input[type="submit"]:active {
 </style>
 
 
+<script type="text/javascript" src="lib/js/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(function() {
+        $('.qtde').change(function() {
+            var linha = $(this).attr('rel');
+            var quantidade = $(this).val();
+            
+            $.ajax({
+                type: "POST",
+                url: "index.php?arquivo=controlador&metodo=atualizarCarrinho",
+
+                data: "quantidade=" + quantidade + "&linha=" + linha,
+                success: function() {
+                    location.reload();
+                }
+
+            });
+        });
+    });
+</script>
 
 
 
