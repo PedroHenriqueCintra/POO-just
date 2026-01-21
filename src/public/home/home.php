@@ -3,7 +3,7 @@
         session_start();
     endif;
 
-    require_once "classes/clientes.php";
+    
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -245,9 +245,17 @@ footer p {
             <div class="cart">
                 <ul>
                     <li>
-                        <a href="index.php?arquivo=controlador&metodo=inserirCarrinho">
+                        <a href="index.php?arquivo=Controlador&metodo=inserirCarrinho">
                             <i class="fa-solid fa-cart-shopping"></i>
-                            <span class="balao">0</span>
+                            <span class="balao">
+                                <?php
+                                   if(isset($_SESSION["carrinho"])):
+                                        echo $_SESSION["qtdeProduto"];
+                                        else:
+                                            echo "0";
+                                   endif;
+                                ?>
+                            </span>
                         </a>
                     </li>
                 </ul>
@@ -279,7 +287,7 @@ footer p {
                 </p>
 
                 <a 
-                    href="index.php?arquivo=controlador&metodo=inserirCarrinho&id=<?= $item->getId(); ?>" class="btn"
+                    href="index.php?arquivo=Controlador&metodo=inserirCarrinho&id=<?= $item->getId(); ?>" class="btn"
                 >
                     Inserir no Carrinho
                 </a>

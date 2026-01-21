@@ -12,12 +12,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/> 
+    
 </head>
 <body>
     <header class="light">
         <div class="container">
             <div class="logo">
-                <a href="index.php?arquivo=controlador&metodo=index">
+                <a href="index.php?arquivo=Controlador&metodo=index">
                     <h1>e-compras</h1>
                 </a>
             </div>
@@ -26,7 +27,13 @@
                     <li>
                         <a href="">
                             <i class="fa-solid fa-cart-shopping"></i>
-                            <span class="balao">0</span>
+                            <span class="balao"><?php
+                            if(isset($_SESSION["carrinho"])):
+                                        echo $_SESSION["qtdeProduto"];
+                            else:
+                                echo "0";
+                                   endif;
+                                   ?></span>
                         </a>
                     </li>
                 </ul>
@@ -35,7 +42,7 @@
     </header>
 
         <main>
-            <form action = "index.php?arquivo=controlador&metodo=finalizarCarrinho"method="post">                
+            <form action = "index.php?arquivo=Controlador&metodo=finalizarCarrinho"method="post">                
                 <table>
                     <tr>
                         <td>Id</td>
@@ -60,22 +67,22 @@
                         <td>R$ <?=   $_SESSION["carrinho"][$indice]["preco"];?></td>
                         <td><img src="lib/img/<?=   $_SESSION["carrinho"][$indice]["imagem"];?>" alt=""></td>
                         <td><?= number_format($subtotal , "2" , "," , "."); ?></td>
-                        <td><a href="index.php?arquivo=controlador&metodo=atualizarCarrinho&linha=<?= $indice ?>"><i class="fa-solid fa-trash"></i></a></td>
+                        <td><a href="index.php?arquivo=Controlador&metodo=atualizarCarrinho&linha=<?= $indice ?>"><i class="fa-solid fa-trash"></i></a></td>
                     </tr>
                     <?php endforeach;?>
                     <tr>
                         <td colspan="6">
                             
                             <label for="">Selecionar Clientes</label>
-                            <select name="" id="">
+                            <select name="cliente" id="1">
                                 <option value="">Selecione um cliente</option>
                                     <?php foreach($cliente as $clien):?>
-                                <option value="<?= $clien->getId();?>"><?=$clien->getNome();?></option>
+                                <option name = "cliente"value="<?= $clien->getId();?>"><?=$clien->getNome();?></option>
                                 <?php endforeach;?>
                             </select>
                         
                             <label for="">Forma de pagamento</label>
-                            <select name="" id="">
+                            <select name="formaPagamento" id="">
                                 <option value="">Selecione uma forma de pagamento</option>
                                 <option value="1">Boleto</option>
                                 <option value="2">Paypal</option>
@@ -85,7 +92,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><a href="index.php?arquivo=controlador&metodo=index">Comprar mais</a>
+                        <td><a href="index.php?arquivo=Controlador&metodo=index">Comprar mais</a>
                         <input type="submit" value = "finalizar">
                         </td>
                     </tr>

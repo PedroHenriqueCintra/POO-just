@@ -1,0 +1,90 @@
+.kabum-checkout {
+    max-width: 900px;
+    margin: 30px auto;
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.kabum-title {
+    font-size: 24px;
+    color: #1c1c1c;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.kabum-subtitle {
+    font-size: 18px;
+    margin: 20px 0 10px;
+    color: #333;
+}
+
+.kabum-cliente p {
+    margin: 4px 0;
+    color: #555;
+}
+
+.kabum-itens {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.kabum-item {
+    display: flex;
+    gap: 15px;
+    padding: 12px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+
+.kabum-item img {
+    width: 100px;
+    height: auto;
+    object-fit: contain;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+
+.kabum-info {
+    flex: 1;
+}
+
+.kabum-desc {
+    font-weight: bold;
+    color: #1c1c1c;
+    margin-bottom: 6px;
+}
+
+.kabum-sub {
+    color: #e67e22;
+    font-weight: bold;
+}
+
+.kabum-total {
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #e67e22;
+    text-align: right;
+}
+
+.kabum-btn {
+    display: block;
+    margin-top: 25px;
+    text-align: center;
+    background: #ffcc00;
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.kabum-btn:hover {
+    background: #e6b800;
+}

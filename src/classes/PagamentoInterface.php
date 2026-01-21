@@ -1,4 +1,4 @@
 <?php
     interface PagamentoInterface{
-             public function pagar($valor);
+             public function Pagar($valor);
     }

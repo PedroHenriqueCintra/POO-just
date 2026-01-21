@@ -8,8 +8,7 @@
         <a href = 'index.php?arquivo=$arquivo&metodo=$metodo'>Fechar</a>";
 
 
-        return $mensagem;
-
+        echo $mensagem;
        }
 
 
@@ -18,7 +17,7 @@
         <a href = 'index.php?arquivo=$arquivo&metodo=$metodo'>Fechar</a>";
 
 
-        return $mensagem;
+        echo  $mensagem;
         
        }
     }
